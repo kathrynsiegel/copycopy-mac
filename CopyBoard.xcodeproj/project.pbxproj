@@ -18,6 +18,7 @@
 		15CD9E3319BACE88006B4FA8 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15CD9E1219BACE87006B4FA8 /* Cocoa.framework */; };
 		15CD9E3B19BACE88006B4FA8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 15CD9E3919BACE88006B4FA8 /* InfoPlist.strings */; };
 		15CD9E3D19BACE88006B4FA8 /* CopyBoardTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CD9E3C19BACE88006B4FA8 /* CopyBoardTests.m */; };
+		15CD9E4919BB8DAA006B4FA8 /* words.txt in Resources */ = {isa = PBXBuildFile; fileRef = 15CD9E4819BB8DAA006B4FA8 /* words.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +51,7 @@
 		15CD9E3819BACE88006B4FA8 /* CopyBoardTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CopyBoardTests-Info.plist"; sourceTree = "<group>"; };
 		15CD9E3A19BACE88006B4FA8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		15CD9E3C19BACE88006B4FA8 /* CopyBoardTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CopyBoardTests.m; sourceTree = "<group>"; };
+		15CD9E4819BB8DAA006B4FA8 /* words.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = words.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +117,7 @@
 		15CD9E1819BACE87006B4FA8 /* CopyBoard */ = {
 			isa = PBXGroup;
 			children = (
+				15CD9E4819BB8DAA006B4FA8 /* words.txt */,
 				15CD9E2419BACE87006B4FA8 /* AppDelegate.h */,
 				15CD9E2519BACE87006B4FA8 /* AppDelegate.m */,
 				15CD9E2719BACE87006B4FA8 /* MainMenu.xib */,
@@ -233,6 +236,7 @@
 				15CD9E1D19BACE87006B4FA8 /* InfoPlist.strings in Resources */,
 				15CD9E2B19BACE87006B4FA8 /* Images.xcassets in Resources */,
 				15CD9E2319BACE87006B4FA8 /* Credits.rtf in Resources */,
+				15CD9E4919BB8DAA006B4FA8 /* words.txt in Resources */,
 				15CD9E2919BACE87006B4FA8 /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
