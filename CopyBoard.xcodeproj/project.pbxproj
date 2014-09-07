@@ -20,6 +20,8 @@
 		15CD9E3D19BACE88006B4FA8 /* CopyBoardTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CD9E3C19BACE88006B4FA8 /* CopyBoardTests.m */; };
 		15CD9E4919BB8DAA006B4FA8 /* words.txt in Resources */ = {isa = PBXBuildFile; fileRef = 15CD9E4819BB8DAA006B4FA8 /* words.txt */; };
 		15CD9E9419BBE894006B4FA8 /* Growl Registration Ticket.growlRegDict.plist in Resources */ = {isa = PBXBuildFile; fileRef = 15CD9E9319BBE894006B4FA8 /* Growl Registration Ticket.growlRegDict.plist */; };
+		15CD9E9819BBEAE8006B4FA8 /* Growl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15CD9E9719BBEAE8006B4FA8 /* Growl.framework */; };
+		15CD9E9B19BBEBB6006B4FA8 /* Growl.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 15CD9E9719BBEAE8006B4FA8 /* Growl.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -31,6 +33,19 @@
 			remoteInfo = CopyBoard;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		15CD9E9919BBEB93006B4FA8 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				15CD9E9B19BBEBB6006B4FA8 /* Growl.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		15CD9E0F19BACE87006B4FA8 /* CopyBoard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CopyBoard.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -54,6 +69,7 @@
 		15CD9E3C19BACE88006B4FA8 /* CopyBoardTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CopyBoardTests.m; sourceTree = "<group>"; };
 		15CD9E4819BB8DAA006B4FA8 /* words.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = words.txt; sourceTree = "<group>"; };
 		15CD9E9319BBE894006B4FA8 /* Growl Registration Ticket.growlRegDict.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Growl Registration Ticket.growlRegDict.plist"; sourceTree = "<group>"; };
+		15CD9E9719BBEAE8006B4FA8 /* Growl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Growl.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +77,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				15CD9E9819BBEAE8006B4FA8 /* Growl.framework in Frameworks */,
 				15CD9E1319BACE87006B4FA8 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -99,6 +116,7 @@
 		15CD9E1119BACE87006B4FA8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				15CD9E9719BBEAE8006B4FA8 /* Growl.framework */,
 				15CD9E1219BACE87006B4FA8 /* Cocoa.framework */,
 				15CD9E3119BACE88006B4FA8 /* XCTest.framework */,
 				15CD9E1419BACE87006B4FA8 /* Other Frameworks */,
@@ -170,6 +188,7 @@
 				15CD9E0B19BACE87006B4FA8 /* Sources */,
 				15CD9E0C19BACE87006B4FA8 /* Frameworks */,
 				15CD9E0D19BACE87006B4FA8 /* Resources */,
+				15CD9E9919BBEB93006B4FA8 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -407,6 +426,7 @@
 					Development,
 					"$(PROJECT_DIR)/Growl-2.0.1-SDK/Plugin",
 					Development/GrowlView.xctemplate,
+					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CopyBoard/CopyBoard-Prefix.pch";
@@ -433,6 +453,7 @@
 					Development,
 					"$(PROJECT_DIR)/Growl-2.0.1-SDK/Plugin",
 					Development/GrowlView.xctemplate,
+					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CopyBoard/CopyBoard-Prefix.pch";

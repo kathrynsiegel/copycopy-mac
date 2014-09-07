@@ -7,8 +7,9 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#include <Growl/Growl.h>
 
-@interface AppDelegate : NSObject <NSApplicationDelegate, NSURLConnectionDelegate> {
+@interface AppDelegate : NSObject <NSApplicationDelegate, NSURLConnectionDelegate, GrowlApplicationBridgeDelegate> {
     NSPasteboard *pboard;
     long changeCount;
     NSTimer *timer;

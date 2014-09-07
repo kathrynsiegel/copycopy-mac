@@ -13,6 +13,8 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
+    [GrowlApplicationBridge setGrowlDelegate:self];
+    
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
     code = [prefs stringForKey:@"copycopycode"];
     if (!code) {
@@ -50,28 +52,28 @@
 }
 
 - (void) checkServer:(NSTimer*)timer {
-    NSLog(@"get request started");
+//    NSLog(@"get request started");
     
     NSMutableURLRequest *request = [NSMutableURLRequest new];
-    NSString* params = [[NSString stringWithFormat:@"code=%@",code] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSString* params = [[NSString stringWithFormat:@"authToken=%@",[self stripSpaces:code]] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     [request setURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://copycopy.herokuapp.com/mac?%@",params]]];
     [request setHTTPMethod:@"GET"];
     
     NSURLConnection *theConnection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
     
     if(theConnection) {
-        NSLog(@"connection initiated: %@",request);
+//        NSLog(@"connection initiated: %@",request);
     }
 
 }
 
 - (void)postToServer: (NSString*)str {
-    NSLog(@"web request started");
-    NSString *post = [NSString stringWithFormat:@"text=%@&authToken=%@", str, code];
+//    NSLog(@"web request started");
+    NSString *post = [NSString stringWithFormat:@"text=%@&authToken=%@", str, [self stripSpaces:code]];
     NSData *postData = [post dataUsingEncoding:NSUTF8StringEncoding];
     NSString *postLength = [NSString stringWithFormat:@"%ld", (unsigned long)[postData length]];
     
-    NSLog(@"Post data: %@", post);
+//    NSLog(@"Post data: %@", post);
     
     NSMutableURLRequest *request = [NSMutableURLRequest new];
     [request setURL:[NSURL URLWithString:@"http://copycopy.herokuapp.com/"]];
@@ -79,12 +81,12 @@
     [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
     [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
     [request setHTTPBody:postData];
-    NSLog(@"request: %@",request);
+//    NSLog(@"request: %@",request);
     
     NSURLConnection *theConnection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
     
     if(theConnection) {
-        NSLog(@"connection initiated 2: %@",request);
+//        NSLog(@"connection initiated 2: %@",request);
     }
 }
 
@@ -108,16 +110,16 @@
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
     NSHTTPURLResponse *ne = (NSHTTPURLResponse *)response;
-    NSLog(@"connection received response %@",response);
+//    NSLog(@"connection received response %@",response);
     if([ne statusCode] == 200) {
-        NSLog(@"connection state is 200 - all okay");
+//        NSLog(@"connection state is 200 - all okay");
     } else {
-        NSLog(@"connection state is NOT 200");
+//        NSLog(@"connection state is NOT 200");
     }
 }
 
 -(void) connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
-    NSLog(@"Conn Err: %@", [error localizedDescription]);
+//    NSLog(@"Conn Err: %@", [error localizedDescription]);
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
@@ -171,8 +173,18 @@
 }
 
 - (void) sendGrowlNotification: (NSString*)text {
-    //[GrowlApplicationBridge notifyWithTitle:@"CopyCopy" description:[NSString stringWithFormat:@"New text copied to clipboard: %@",text]
-    //                       notificationName:@"CopyCopy" iconData:nil priority:1 isSticky:YES clickContext:nil];
+    [GrowlApplicationBridge notifyWithTitle:@"CopyCopy" description:@"New text copied to clipboard."
+                           notificationName:@"CopyCopy" iconData:nil priority:1 isSticky:YES clickContext:nil];
     
+}
+
+- (NSDictionary *) registrationDictionaryForGrowl {
+    NSString* path = [[NSBundle mainBundle] pathForResource:@"Growl Registration Ticket.growlRegDict" ofType:@"plist"];
+    NSDictionary* configs = [NSDictionary dictionaryWithContentsOfFile:path];
+    return configs;
+}
+
+- (NSString*) stripSpaces: (NSString*)str {
+    return [str stringByReplacingOccurrencesOfString:@" " withString:@""];
 }
 @end
