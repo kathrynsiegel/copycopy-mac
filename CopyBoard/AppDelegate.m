@@ -53,12 +53,10 @@
     NSLog(@"get request started");
     
     NSMutableURLRequest *request = [NSMutableURLRequest new];
-    [request setURL:[NSURL URLWithString:@"http://copycopy.herokuapp.com/mac"]];
-//    NSString *get = [NSString stringWithFormat:@"authToken=%@", code];
-//    NSData *getData = [get dataUsingEncoding:NSUTF8StringEncoding];
-//    [request setHTTPMethod:@"GET"];
-//    [request setValue:[NSString stringWithFormat:@"%ld", (unsigned long)[getData length]] forHTTPHeaderField:@"Content-Length"];
-//    [request setHTTPBody:getData];
+    NSString* params = [[NSString stringWithFormat:@"code=%@",code] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    [request setURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://copycopy.herokuapp.com/mac?%@",params]]];
+    [request setHTTPMethod:@"GET"];
+    
     NSURLConnection *theConnection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
     
     if(theConnection) {
@@ -101,6 +99,7 @@
     NSString* text = [json objectForKey:@"text"];
     if (text) {
         NSLog(@"text received: %@",text);
+        [self sendGrowlNotification:text];
         [pboard declareTypes:[NSArray arrayWithObject:NSStringPboardType] owner:nil];
         [pboard setString:text forType:NSStringPboardType];
         changeCount = [pboard changeCount];
@@ -169,5 +168,11 @@
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
     [prefs setObject:code forKey:@"copycopycode"];
     [self.currentCode setStringValue:code];
+}
+
+- (void) sendGrowlNotification: (NSString*)text {
+    //[GrowlApplicationBridge notifyWithTitle:@"CopyCopy" description:[NSString stringWithFormat:@"New text copied to clipboard: %@",text]
+    //                       notificationName:@"CopyCopy" iconData:nil priority:1 isSticky:YES clickContext:nil];
+    
 }
 @end

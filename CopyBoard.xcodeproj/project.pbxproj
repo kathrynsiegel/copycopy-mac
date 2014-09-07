@@ -19,6 +19,7 @@
 		15CD9E3B19BACE88006B4FA8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 15CD9E3919BACE88006B4FA8 /* InfoPlist.strings */; };
 		15CD9E3D19BACE88006B4FA8 /* CopyBoardTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CD9E3C19BACE88006B4FA8 /* CopyBoardTests.m */; };
 		15CD9E4919BB8DAA006B4FA8 /* words.txt in Resources */ = {isa = PBXBuildFile; fileRef = 15CD9E4819BB8DAA006B4FA8 /* words.txt */; };
+		15CD9E9419BBE894006B4FA8 /* Growl Registration Ticket.growlRegDict.plist in Resources */ = {isa = PBXBuildFile; fileRef = 15CD9E9319BBE894006B4FA8 /* Growl Registration Ticket.growlRegDict.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +53,7 @@
 		15CD9E3A19BACE88006B4FA8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		15CD9E3C19BACE88006B4FA8 /* CopyBoardTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CopyBoardTests.m; sourceTree = "<group>"; };
 		15CD9E4819BB8DAA006B4FA8 /* words.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = words.txt; sourceTree = "<group>"; };
+		15CD9E9319BBE894006B4FA8 /* Growl Registration Ticket.growlRegDict.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Growl Registration Ticket.growlRegDict.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +125,7 @@
 				15CD9E2719BACE87006B4FA8 /* MainMenu.xib */,
 				15CD9E2A19BACE87006B4FA8 /* Images.xcassets */,
 				15CD9E1919BACE87006B4FA8 /* Supporting Files */,
+				15CD9E9319BBE894006B4FA8 /* Growl Registration Ticket.growlRegDict.plist */,
 			);
 			path = CopyBoard;
 			sourceTree = "<group>";
@@ -216,6 +219,7 @@
 			knownRegions = (
 				en,
 				Base,
+				English,
 			);
 			mainGroup = 15CD9E0619BACE87006B4FA8;
 			productRefGroup = 15CD9E1019BACE87006B4FA8 /* Products */;
@@ -234,6 +238,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				15CD9E1D19BACE87006B4FA8 /* InfoPlist.strings in Resources */,
+				15CD9E9419BBE894006B4FA8 /* Growl Registration Ticket.growlRegDict.plist in Resources */,
 				15CD9E2B19BACE87006B4FA8 /* Images.xcassets in Resources */,
 				15CD9E2319BACE87006B4FA8 /* Credits.rtf in Resources */,
 				15CD9E4919BB8DAA006B4FA8 /* words.txt in Resources */,
@@ -390,6 +395,19 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Growl-2.0.1-SDK/Developer",
+					Tools/MultiGrowl/external,
+					"$(PROJECT_DIR)/Growl-2.0.1-SDK/Developer",
+					Tools/MultiGrowl/external/legacy,
+					"$(PROJECT_DIR)/Growl-2.0.1-SDK/Framework",
+					"$(PROJECT_DIR)/Growl-2.0.1-SDK/Framework/Legacy",
+					"$(PROJECT_DIR)/Growl-2.0.1-SDK/Plugin",
+					Development,
+					"$(PROJECT_DIR)/Growl-2.0.1-SDK/Plugin",
+					Development/GrowlView.xctemplate,
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CopyBoard/CopyBoard-Prefix.pch";
 				INFOPLIST_FILE = "CopyBoard/CopyBoard-Info.plist";
@@ -403,6 +421,19 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Growl-2.0.1-SDK/Developer",
+					Tools/MultiGrowl/external,
+					"$(PROJECT_DIR)/Growl-2.0.1-SDK/Developer",
+					Tools/MultiGrowl/external/legacy,
+					"$(PROJECT_DIR)/Growl-2.0.1-SDK/Framework",
+					"$(PROJECT_DIR)/Growl-2.0.1-SDK/Framework/Legacy",
+					"$(PROJECT_DIR)/Growl-2.0.1-SDK/Plugin",
+					Development,
+					"$(PROJECT_DIR)/Growl-2.0.1-SDK/Plugin",
+					Development/GrowlView.xctemplate,
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CopyBoard/CopyBoard-Prefix.pch";
 				INFOPLIST_FILE = "CopyBoard/CopyBoard-Info.plist";
