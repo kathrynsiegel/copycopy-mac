@@ -20,8 +20,11 @@
     if (!code) {
         code = [self generateCopyCopyCode];
         NSLog(@"code: %@",code);
+        [self.codeField setStringValue:code];
+    } else {
+        [self.codeField setStringValue:[self generateCopyCopyCode]];
     }
-    [self.codeField setStringValue:code];
+    [self.currentCode setStringValue:code];
     [prefs setObject:code forKey:@"copycopycode"];
     
     pboard = [NSPasteboard generalPasteboard];
@@ -56,7 +59,7 @@
     
     NSMutableURLRequest *request = [NSMutableURLRequest new];
     NSString* params = [[NSString stringWithFormat:@"authToken=%@",[self stripSpaces:code]] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    [request setURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://copycopy.herokuapp.com/mac?%@",params]]];
+    [request setURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://copycopy.herokuapp.com/mac?%@&device=mac-%@",params,[self getUUID]]]];
     [request setHTTPMethod:@"GET"];
     
     NSURLConnection *theConnection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
@@ -69,7 +72,7 @@
 
 - (void)postToServer: (NSString*)str {
 //    NSLog(@"web request started");
-    NSString *post = [NSString stringWithFormat:@"text=%@&authToken=%@", str, [self stripSpaces:code]];
+    NSString *post = [NSString stringWithFormat:@"text=%@&authToken=%@&device=mac-%@", str, [self stripSpaces:code],[self getUUID]];
     NSData *postData = [post dataUsingEncoding:NSUTF8StringEncoding];
     NSString *postLength = [NSString stringWithFormat:@"%ld", (unsigned long)[postData length]];
     
@@ -87,6 +90,29 @@
     
     if(theConnection) {
 //        NSLog(@"connection initiated 2: %@",request);
+    }
+}
+
+- (void)postToRegister {
+    //    NSLog(@"web request started");
+    NSString *post = [NSString stringWithFormat:@"authToken=%@&device=mac-%@", [self stripSpaces:code],[self getUUID]];
+    NSData *postData = [post dataUsingEncoding:NSUTF8StringEncoding];
+    NSString *postLength = [NSString stringWithFormat:@"%ld", (unsigned long)[postData length]];
+    
+    //    NSLog(@"Post data: %@", post);
+    
+    NSMutableURLRequest *request = [NSMutableURLRequest new];
+    [request setURL:[NSURL URLWithString:@"http://copycopy.herokuapp.com/register"]];
+    [request setHTTPMethod:@"POST"];
+    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    [request setHTTPBody:postData];
+    //    NSLog(@"request: %@",request);
+    
+    NSURLConnection *theConnection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    
+    if(theConnection) {
+        //        NSLog(@"connection initiated 2: %@",request);
     }
 }
 
@@ -170,6 +196,7 @@
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
     [prefs setObject:code forKey:@"copycopycode"];
     [self.currentCode setStringValue:code];
+    [self postToRegister];
 }
 
 - (void) sendGrowlNotification: (NSString*)text {
@@ -186,5 +213,19 @@
 
 - (NSString*) stripSpaces: (NSString*)str {
     return [str stringByReplacingOccurrencesOfString:@" " withString:@""];
+}
+
+- (NSString *)getUUID
+{
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    NSString *uuid = [prefs objectForKey:@"deviceUUID"];
+    if (!uuid) {
+        CFUUIDRef theUUID = CFUUIDCreate(NULL);
+        CFStringRef string = CFUUIDCreateString(NULL, theUUID);
+        CFRelease(theUUID);
+        uuid = (__bridge NSString *)string;
+        [prefs setObject:uuid forKey:@"deviceUUID"];
+    }
+    return uuid;
 }
 @end
